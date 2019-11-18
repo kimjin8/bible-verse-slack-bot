@@ -12,12 +12,6 @@ import requests
 import time
 
 
-# Environment variables
-# load_dotenv()
-WEBHOOK_URL = os.environ.get("WEBHOOK_URL")
-YOUVERSION_DEVELOPER_TOKEN = os.environ.get("YOUVERSION_DEVELOPER_TOKEN")
-
-
 # Functions
 # Calculate Day of the Year
 def day_of_year():
@@ -89,12 +83,20 @@ def post_to_slack(message):
 
 # ---------------------------------------------------
 # Main()
-day_of_year = day_of_year()
+def lambda_handler():
 
-verse_of_day = verse_of_day(day_of_year)
-verse_of_day_message = "*"+"Day " + day_of_year+"*" + "\n" + verse_of_day
+  # Environment variables
+  # load_dotenv()
+  WEBHOOK_URL = os.environ.get("WEBHOOK_URL")
+  YOUVERSION_DEVELOPER_TOKEN = os.environ.get("YOUVERSION_DEVELOPER_TOKEN")
 
-verse_of_day_message_block = message_block_text(verse_of_day_message)
+  day_of_year = day_of_year()
 
-post_to_slack(verse_of_day_message_block)
+  verse_of_day = verse_of_day(day_of_year)
+  verse_of_day_message = "*"+"Day " + day_of_year+"*" + "\n" + verse_of_day
 
+  verse_of_day_message_block = message_block_text(verse_of_day_message)
+
+  post_to_slack(verse_of_day_message_block)
+  
+  return 
