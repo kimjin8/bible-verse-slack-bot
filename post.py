@@ -8,12 +8,12 @@ import os
 import slack
 import json
 import requests
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import time
 
 
 # Environment variables
-load_dotenv()
+# load_dotenv()
 WEBHOOK_URL = os.environ.get("WEBHOOK_URL")
 YOUVERSION_DEVELOPER_TOKEN = os.environ.get("YOUVERSION_DEVELOPER_TOKEN")
 
