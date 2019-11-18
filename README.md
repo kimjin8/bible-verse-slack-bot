@@ -1,1 +1,2 @@
-# bible-verse-slack-bot
+Slack App: Bible Verse
+A Bible verse to kickstart your day.
