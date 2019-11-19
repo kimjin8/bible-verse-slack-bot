@@ -40,7 +40,7 @@ def verse_of_day(day_of_year):
       api_url,
       headers=headers
   )
-  # print('api response:', response.content)
+  print('api response:', response.content)
   
   verse_json = bytes_to_json(response.content)
   
@@ -64,7 +64,7 @@ def message_block_text(text):
         }
       }
     ]
-  # print(block_text)
+  print("block text:", block_text)
   return block_text
 
 
@@ -78,12 +78,14 @@ def post_to_slack(message):
       raise ValueError(
           'Request to slack returned an error %s, the response is:\n%s'
           % (response.status_code, response.text)
-      )  
+      )
+  else:
+    print("API callL status code: ", response.status_code)
 
 
 # ---------------------------------------------------
 # Main()
-def lambda_handler():
+def lambda_handler(event, context):
 
   # Environment variables
   # load_dotenv()
