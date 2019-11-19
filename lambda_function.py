@@ -5,12 +5,12 @@
 # YouVersion API Reference: https://yv-public-api-docs.netlify.com/getting-started.html
 
 import os
-import slack
 import json
-import requests
+#import slack
+#import requests
+from botocore.vendored import requests
 # from dotenv import load_dotenv
 import time
-
 
 # Functions
 # Calculate Day of the Year
@@ -67,7 +67,6 @@ def message_block_text(text):
   print("block text:", block_text)
   return block_text
 
-
 def post_to_slack(message):
   slack_data = json.dumps({'blocks': message})
   response = requests.post(
@@ -87,15 +86,18 @@ def post_to_slack(message):
 # Main()
 def lambda_handler(event, context):
 
+  global WEBHOOK_URL
+  global YOUVERSION_DEVELOPER_TOKEN
+  
   # Environment variables
   # load_dotenv()
   WEBHOOK_URL = os.environ.get("WEBHOOK_URL")
   YOUVERSION_DEVELOPER_TOKEN = os.environ.get("YOUVERSION_DEVELOPER_TOKEN")
 
-  day_of_year = day_of_year()
+  day_of_year_var = day_of_year()
 
-  verse_of_day = verse_of_day(day_of_year)
-  verse_of_day_message = "*"+"Day " + day_of_year+"*" + "\n" + verse_of_day
+  verse_of_day_var = verse_of_day(day_of_year_var)
+  verse_of_day_message = "*"+"Day " + day_of_year_var +"*" + "\n" + verse_of_day_var
 
   verse_of_day_message_block = message_block_text(verse_of_day_message)
 
