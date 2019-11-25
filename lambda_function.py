@@ -7,9 +7,7 @@
 import os
 import json
 import time
-
-# Uncomment to run on AWS Lambda; Comment libraries for local environment
-from botocore.vendored import requests
+import requests
 
 
 # Functions
@@ -111,7 +109,6 @@ def lambda_handler(event, context):
 
 # ---------------------------------------------------
 def local():
-  # import requests
   from dotenv import load_dotenv
 
   load_dotenv() 
