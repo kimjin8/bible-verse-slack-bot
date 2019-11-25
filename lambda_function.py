@@ -6,11 +6,11 @@
 
 import os
 import json
-#import slack
-#import requests
-from botocore.vendored import requests
-# from dotenv import load_dotenv
 import time
+
+# Uncomment to run on AWS Lambda; Comment libraries for local environment
+from botocore.vendored import requests
+
 
 # Functions
 # Calculate Day of the Year
@@ -46,7 +46,7 @@ def verse_of_day(day_of_year):
   
   verse_ref = verse_json["verse"]["human_reference"]
   verse_text = verse_json["verse"]["text"]
-  verse = "*"+verse_ref+"*" + "  " + verse_text
+  verse = verse_text + "  " + verse_ref
   print(verse)
   
   return verse
@@ -90,10 +90,13 @@ def lambda_handler(event, context):
   global YOUVERSION_DEVELOPER_TOKEN
   
   # Environment variables
-  # load_dotenv()
   WEBHOOK_URL = os.environ.get("WEBHOOK_URL")
   YOUVERSION_DEVELOPER_TOKEN = os.environ.get("YOUVERSION_DEVELOPER_TOKEN")
-
+  print("WEBHOOK_URL:", WEBHOOK_URL, "\n YOUVERSION_DEVELOPER_TOKEN:", YOUVERSION_DEVELOPER_TOKEN)
+  if (WEBHOOK_URL is None) or (YOUVERSION_DEVELOPER_TOKEN is None):
+    print("Environment variable retrieval error")
+    return
+  
   day_of_year_var = day_of_year()
 
   verse_of_day_var = verse_of_day(day_of_year_var)
@@ -104,3 +107,20 @@ def lambda_handler(event, context):
   post_to_slack(verse_of_day_message_block)
   
   return 
+
+
+# ---------------------------------------------------
+def local():
+  # import requests
+  from dotenv import load_dotenv
+
+  load_dotenv() 
+
+  event = "event"
+  context = "context"
+
+  lambda_handler(event, context)
+  return
+
+# Uncomment to run in local environment; Comment libraries for AWS lambda 
+# local()
