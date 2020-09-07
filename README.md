@@ -7,7 +7,8 @@ The Bible Verse app sends you a verse of the day every morning!
 **Support**
 
 If you have any questions, please contact me at niyaoqunali@outlook.com.
-Here's the [privacy policy](https://www.termsfeed.com/live/42cb458a-770f-4b03-abeb-044ea132444c)
+
+Here's the [privacy policy](https://www.termsfeed.com/live/42cb458a-770f-4b03-abeb-044ea132444c).
 
 **Credits**
 
